@@ -73,9 +73,14 @@ public class UserPanel {
 		followingListPanel = new JPanel();
 		JPanel messageInputPanel = new JPanel();
 		messageListPanel = new JPanel();
-
+		
+		// A3: Create a label for userCreationTime
+		JLabel userCreationTime = new JLabel();
+		userCreationTime.setText("User creation time: " + String.valueOf(user.getTimeStamp()));
+		
 		userLastUpdate = new JLabel();
-
+		
+		updateInfoPanel.add(userCreationTime);
 		updateInfoPanel.add(userLastUpdate);
 		
 		// Creating message text field so user can input who they want to follow
@@ -197,6 +202,11 @@ public class UserPanel {
 		bottomPanel.add(messageListPanel);
 
 	}
+	
+	// A3: Display time whenever a new tweet is posted onto User's news feed
+	public void updateLastUpdateTime() {
+		userLastUpdate.setText("User last update time: " + String.valueOf(user.getLastUpdateTime()));
+	}
 
 	public void setFollowingList() {
 		
@@ -228,6 +238,7 @@ public class UserPanel {
 		setMessageList();
 		mainPanel.revalidate();
 		mainPanel.repaint();
+		updateLastUpdateTime();
 	}
 
 	public JFrame getFrame() {

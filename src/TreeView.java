@@ -135,7 +135,55 @@ public class TreeView extends JPanel{
 		}
 		return false;
 	}
-
+	
+	// A3: Validates Users/Groups ID to make sure there are no duplicate IDs and spacings in the ID
+	public boolean isValidation() {
+		User firstUser, secondUser;
+		UserGroup thisUserGroup, thatUserGroup;
+		String firstId = null;
+		String secondId = null;
+		int count;
+		
+		Enumeration enum1 = rootNode.breadthFirstEnumeration();
+		
+		while (enum1.hasMoreElements()) {
+			count = 0;
+			DefaultMutableTreeNode nodeThis = (DefaultMutableTreeNode) enum1.nextElement();
+			Object thisNodeObject = nodeThis.getUserObject();
+			
+			if (thisNodeObject instanceof User) {
+				firstUser = (User) thisNodeObject;
+				firstId = firstUser.getUserID();
+			} else if (thisNodeObject instanceof UserGroup) {
+				thisUserGroup = (UserGroup) thisNodeObject;
+				firstId = thisUserGroup.getGroupID();
+			}
+			
+			Enumeration enum2 = rootNode.breadthFirstEnumeration();
+			
+			while (enum2.hasMoreElements()) {
+				DefaultMutableTreeNode nodeThat = (DefaultMutableTreeNode) enum2.nextElement();
+				Object thatNodeObject = nodeThat.getUserObject();
+				
+				if (thatNodeObject instanceof User) {
+					secondUser = (User) thatNodeObject;
+					secondId = secondUser.getUserID();
+				} else if (thatNodeObject instanceof UserGroup) {
+					thatUserGroup = (UserGroup) thatNodeObject;
+					secondId = thatUserGroup.getGroupID();
+				}
+				if (secondId.equals(firstId)) {
+					count++;
+				}
+			}
+			
+			if ((count > 1) || firstId.contains(" ")) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	// Gets the user by respective userID
 	public User getUserFrom(String userID) {
 		

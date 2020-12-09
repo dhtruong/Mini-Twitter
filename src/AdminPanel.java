@@ -95,7 +95,7 @@ public class AdminPanel {
 		topRightPanel.add(openUserViewButton);
 
 		JPanel bottomRightPanel = new JPanel();
-		bottomRightPanel.setLayout(new GridLayout(3, 2));
+		bottomRightPanel.setLayout(new GridLayout(4, 2));
 
 		
 		// Create a button to add user(s) to the groups onto tree view
@@ -176,6 +176,26 @@ public class AdminPanel {
 			}
 		});
 		
+		
+		// A3: Create a button to validate User(s)/Group(s) ID by displaying true or false
+		JButton showValidation = new JButton("Show Validation");
+		showValidation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				JOptionPane.showMessageDialog(frame, "ID Validation Status: " + jtree.isValidation(),
+						"Show ID Validation Status", JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+		
+		// A3: Create a button to show the last user ID who updated their news feed
+		JButton showLastUpdated = new JButton("Last Updated User");
+		showLastUpdated.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				JOptionPane.showMessageDialog(frame, "Last updated user: "
+						+ updatedUser, "Show Last Updated User",
+						JOptionPane.PLAIN_MESSAGE);
+			}
+		});
+
 		// Adding all the buttons to the panel
 		bottomRightPanel.add(showAddUserButton);
 		bottomRightPanel.add(showAddGroupButton);
@@ -183,6 +203,8 @@ public class AdminPanel {
 		bottomRightPanel.add(showGroupButton);
 		bottomRightPanel.add(showMessagesButton);
 		bottomRightPanel.add(showPositiveButton);
+		bottomRightPanel.add(showValidation);
+		bottomRightPanel.add(showLastUpdated);
 
 		rightPanel.add(topRightPanel);
 		rightPanel.add(bottomRightPanel);
